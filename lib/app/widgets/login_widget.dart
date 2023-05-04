@@ -8,65 +8,95 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
+  final _formKey = GlobalKey<FormState>();
+
   final _loginController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _focusNode = FocusNode();
 
   @override
   void dispose() {
     _loginController.dispose();
     _passwordController.dispose();
-    _focusNode.dispose();
     super.dispose();
   }
 
   @override
   build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _focusNode.unfocus(),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+    return Form(
+        key: _formKey,
         child: Column(children: [
-          TextField(
+          TextFormField(
             controller: _loginController,
+            textInputAction: TextInputAction.next,
+            // onEditingComplete: () => FocusScope.of(context).nextFocus(),
+            onFieldSubmitted: (_) {
+              //   FocusScope.of(context).requestFocus(FocusNode());
+              FocusScope.of(context).nextFocus();
+            },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Поле не должно быть пустым';
+              }
+              return null;
+            },
             decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0)),
-                label: const Text('Имя пользователя')),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+              labelText: 'Имя пользователя',
+            ),
           ),
           const SizedBox(height: 16),
-          TextField(
+          TextFormField(
+            // style: ,
             controller: _passwordController,
-            obscureText: true,
+            textInputAction: TextInputAction.done,
+            // onEditingComplete: () => FocusScope.of(context).unfocus(),
+            // onFieldSubmitted: (_) {
+            //   if (_formKey.currentState!.validate()) {
+            //     // Form is valid, do something
+            //   }
+            // },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Поле не должно быть пустым';
+              }
+              return null;
+            },
             decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0)),
-                label: const Text('Пароль')),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+              labelText: 'Пароль',
+            ),
+            obscureText: true,
           ),
-          const SizedBox(height: 16),
-          Align(
-              alignment: AlignmentDirectional.bottomCenter,
-              child: TextButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blueAccent),
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                  minimumSize: MaterialStateProperty.all<Size>(
-                      const Size(double.infinity, 56)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
+          const Spacer(flex: 1),
+          TextButton(
+            onPressed: () => {
+              if (_formKey.currentState!.validate())
+                {
+                  // Form is valid, do something
+                  print('Form is valid!!!!!')
+                }
+              // ...
+            },
+            style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.blueAccent),
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              minimumSize: MaterialStateProperty.all<Size>(
+                  const Size(double.infinity, 54)),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
-                onPressed: () {
-                  // ...
-                },
-                child: const Text('Войти'),
-              ))
-        ]),
-      ),
-    );
+              ),
+            ),
+            child: const Text('Войти'),
+          ),
+        ]));
   }
 }
