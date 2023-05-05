@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "948920929657",
+    "project_id": "omega-f7d7d",
+    "storage_bucket": "omega-f7d7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:948920929657:android:749e276ed4371f5c3973a8",
+        "android_client_info": {
+          "package_name": "com.example.omega_practice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "948920929657-pi2m9fe98t5f6ak17c3dhcm01e91l9r2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9CZNm2u9m1PWUXtS77ZOWk_uT_pgQZ28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "948920929657-pi2m9fe98t5f6ak17c3dhcm01e91l9r2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

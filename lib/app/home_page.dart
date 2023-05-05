@@ -14,9 +14,10 @@ class HomePage extends StatelessWidget {
           elevation: 4,
           shadowColor: Colors.blueGrey[50],
         ),
-        body: Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-            child: const LoginWidget()));
+        body: SafeArea(
+            child: Container(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 16.0),
+                child: const LoginWidget())));
   }
 }
