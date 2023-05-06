@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,19 +49,9 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAcodqs8yDpuhZj3-EPGCgTCwA1_DRRrsY',
-    appId: '1:948920929657:web:63e12e65f790f05d3973a8',
-    messagingSenderId: '948920929657',
-    projectId: 'omega-f7d7d',
-    authDomain: 'omega-f7d7d.firebaseapp.com',
-    storageBucket: 'omega-f7d7d.appspot.com',
-    measurementId: 'G-FFMRJ34TPW',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyC9CZNm2u9m1PWUXtS77ZOWk_uT_pgQZ28',
-    appId: '1:948920929657:android:749e276ed4371f5c3973a8',
+    appId: '1:948920929657:android:9c31cd2eb55cdb5e3973a8',
     messagingSenderId: '948920929657',
     projectId: 'omega-f7d7d',
     storageBucket: 'omega-f7d7d.appspot.com',
@@ -63,21 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyA7vowRwczo6l1edROhftgIHushdZIOrgo',
-    appId: '1:948920929657:ios:384ea035040222253973a8',
+    appId: '1:948920929657:ios:d9ce5907238c82b53973a8',
     messagingSenderId: '948920929657',
     projectId: 'omega-f7d7d',
     storageBucket: 'omega-f7d7d.appspot.com',
-    iosClientId: '948920929657-v9rjni6nbti4l6god7o662i9epbi6ut2.apps.googleusercontent.com',
+    iosClientId:
+        '948920929657-v9rjni6nbti4l6god7o662i9epbi6ut2.apps.googleusercontent.com',
     iosBundleId: 'com.example.omegaPractice',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyA7vowRwczo6l1edROhftgIHushdZIOrgo',
-    appId: '1:948920929657:ios:69ef3449698e2bb43973a8',
-    messagingSenderId: '948920929657',
-    projectId: 'omega-f7d7d',
-    storageBucket: 'omega-f7d7d.appspot.com',
-    iosClientId: '948920929657-p1ah4c37hji626of2nj24vui5vmb7vtk.apps.googleusercontent.com',
-    iosBundleId: 'com.example.omegaPractice.RunnerTests',
   );
 }

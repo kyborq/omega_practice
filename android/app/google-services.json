@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:948920929657:android:749e276ed4371f5c3973a8",
+        "mobilesdk_app_id": "1:948920929657:android:9c31cd2eb55cdb5e3973a8",
         "android_client_info": {
           "package_name": "com.example.omega_practice"
         }
@@ -29,6 +29,13 @@
             {
               "client_id": "948920929657-pi2m9fe98t5f6ak17c3dhcm01e91l9r2.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "948920929657-p1ah4c37hji626of2nj24vui5vmb7vtk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.omegaPractice.RunnerTests"
+              }
             }
           ]
         }
