@@ -28,21 +28,21 @@ class LoginScreen extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () async {
-                final user = await authService.signIn(
-                  'k.podyganov@mail.ru',
-                  '12345678',
-                );
+                // final user = await authService.signIn(
+                //   'k.podyganov@mail.ru',
+                //   '12345678',
+                // );
 
-                if (user != null) {
-                  // ignore: avoid_print
-                  print('YAY!!!!');
-                  // context.go('/')
-                  handleHome();
-                  // GoRouter.of(context).go('/dashboard');
-                } else {
-                  // print('NOT YAY :(((');
-                  // обработать ошибку аутентификации
-                }
+                // if (user != null) {
+                //   // ignore: avoid_print
+                //   print('YAY!!!!');
+                //   // context.go('/')
+                //   handleHome();
+                //   // GoRouter.of(context).go('/dashboard');
+                // } else {
+                //   // print('NOT YAY :(((');
+                //   // обработать ошибку аутентификации
+                // }
               },
               child: const Text('Login'),
             ),
