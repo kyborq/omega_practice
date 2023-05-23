@@ -27,14 +27,11 @@ class AppRouter {
         builder: (context, state) => const RegisterScreen(),
       ),
     ],
-    redirect: (context, state) {
-      final authState = _authBloc.state;
+    // TODO: Добавить редирект если не авторизован
+    // redirect: (context, state) {
+    //   final authState = _authBloc.state;
 
-      if (authState is AuthInitial && state.location != AppPages.login.toPath) {
-        return AppPages.login.toPath;
-      }
-
-      return null;
-    },
+    //   return null;
+    // },
   );
 }

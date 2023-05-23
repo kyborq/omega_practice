@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:omega_practice/bloc/auth_bloc.dart';
 import 'package:omega_practice/firebase_options.dart';
 import 'package:omega_practice/router/app_router.dart';
+import 'package:omega_practice/services/auth_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,11 +22,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        // BlocProvider<AuthBloc>(create: (_) => AuthBloc(auth: null)..add(AppStarted())),
-        // BlocProvider<SignInBloc>(create: (_) => SignInBloc()),
-      ],
+    return BlocProvider<AuthBloc>(
+      // create: (_) => AuthBloc(AuthService())..add(AppStarted()),
       child: Builder(
         builder: (context) {
           final authBloc = BlocProvider.of<AuthBloc>(context);

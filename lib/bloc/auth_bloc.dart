@@ -6,19 +6,26 @@ part 'auth_state.dart';
 part 'auth_event.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc({required FirebaseAuth auth})
-      : _auth = auth,
-        super(AuthInitial()) {
-    on<AuthStarted>(_onAuthStarted);
+  AuthBloc(FirebaseAuth? auth)
+      : _auth = auth ?? FirebaseAuth.instance,
+        super(UnInitialized()) {
+    on<AppStarted>(_appStarted);
+    on<AuthenticationUserChanged>(_onAuthenticationUserChanged);
   }
 
   final FirebaseAuth _auth;
 
-  Future<void> _onAuthStarted(
-    AuthStarted event,
+  Future<void> _appStarted(
+    AppStarted event,
     Emitter<AuthState> emit,
   ) async {
-    final user = event.user;
-    emit(AuthSuccess(user));
+    // TODO: ...
+  }
+
+  Future<void> _onAuthenticationUserChanged(
+    AuthenticationUserChanged event,
+    Emitter<AuthState> emit,
+  ) async {
+    // TODO: ...
   }
 }
