@@ -24,7 +24,8 @@ class MyApp extends StatelessWidget {
       create: (context) => AuthBloc(),
       child: Builder(
         builder: (context) {
-          final appRouter = AppRouter();
+          final authBloc = BlocProvider.of<AuthBloc>(context);
+          final appRouter = AppRouter(authBloc);
 
           return MaterialApp.router(
             title: 'Flutter Demo',

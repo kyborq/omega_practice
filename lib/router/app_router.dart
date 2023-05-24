@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:omega_practice/bloc/auth_bloc.dart';
 import 'package:omega_practice/router/app_pages.dart';
@@ -8,7 +8,9 @@ import 'package:omega_practice/screens/register_screen.dart';
 import 'package:omega_practice/screens/splash_screen.dart';
 
 class AppRouter {
-  final AuthBloc _authBloc = AuthBloc(FirebaseAuth.instance);
+  AppRouter(AuthBloc bloc) : _authBloc = bloc;
+
+  final AuthBloc _authBloc;
 
   GoRouter get goRouter => _goRouter;
 
