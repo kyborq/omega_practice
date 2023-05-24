@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:omega_practice/router/app_pages.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,10 +7,17 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        children: const [
-          Text('Hello!'),
-        ],
+      child: Scaffold(
+        appBar: AppBar(title: Text(AppPages.home.toTitle)),
+        backgroundColor: Theme.of(context).colorScheme.background,
+        body: Center(
+          child: ElevatedButton(
+            onPressed: () {
+              // ...
+            },
+            child: const Text('Hello world!2'),
+          ),
+        ),
       ),
     );
   }
