@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:omega_practice/bloc/auth_bloc.dart';
 import 'package:omega_practice/router/app_pages.dart';
@@ -7,7 +8,7 @@ import 'package:omega_practice/screens/register_screen.dart';
 import 'package:omega_practice/screens/splash_screen.dart';
 
 class AppRouter {
-  final AuthBloc _authBloc = AuthBloc();
+  final AuthBloc _authBloc = AuthBloc(FirebaseAuth.instance);
 
   GoRouter get goRouter => _goRouter;
 
@@ -20,7 +21,7 @@ class AppRouter {
       ),
       GoRoute(
         path: AppPages.login.toPath,
-        builder: (context, state) => const LoginScreen(),
+        builder: (context, state) => LoginScreen(),
       ),
       GoRoute(
         path: AppPages.register.toPath,

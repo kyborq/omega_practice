@@ -6,11 +6,15 @@ part 'auth_state.dart';
 part 'auth_event.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc() : super(AuthInitial()) {
+  AuthBloc(FirebaseAuth? auth)
+      : _auth = auth ?? FirebaseAuth.instance,
+        super(AuthInitial()) {
     on<Login>(_onLogin);
     on<Register>(_onRegister);
     on<Logout>(_onLogout);
   }
+
+  final FirebaseAuth _auth;
 
   dynamic _onLogin(Login event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
