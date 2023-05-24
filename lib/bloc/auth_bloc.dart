@@ -12,7 +12,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<Logout>(_onLogout);
   }
 
-  dynamic _onLogin(Login event, Emitter<AuthState> emit) async {}
-  dynamic _onRegister(Register event, Emitter<AuthState> emit) async {}
-  dynamic _onLogout(Logout event, Emitter<AuthState> emit) async {}
+  dynamic _onLogin(Login event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+  }
+
+  dynamic _onRegister(Register event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+  }
+
+  dynamic _onLogout(Logout event, Emitter<AuthState> emit) async {
+    emit(AuthInitial());
+  }
 }
