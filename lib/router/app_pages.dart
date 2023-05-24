@@ -11,9 +11,9 @@ extension AppPageExtension on AppPages {
       case AppPages.splash:
         return '/splash';
       case AppPages.login:
-        return 'login';
+        return '/login';
       case AppPages.register:
-        return 'register';
+        return '/register';
       case AppPages.home:
         return '/';
     }

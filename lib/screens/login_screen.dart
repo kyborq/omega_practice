@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:omega_practice/bloc/auth_bloc.dart';
 import 'package:omega_practice/router/app_pages.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -7,19 +8,26 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(AppPages.login.toTitle),
-      ),
-      body: Column(
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              // context.go(AppPages.register.toPath);
-            },
-            child: const Text('Войти'),
-          ),
-        ],
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthLoading) {
+          // TODO: Do something with progress state
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(AppPages.login.toTitle),
+        ),
+        body: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                BlocProvider.of<AuthBloc>(context).add(Login());
+              },
+              child: const Text('Войти'),
+            ),
+          ],
+        ),
       ),
     );
   }

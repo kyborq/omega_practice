@@ -35,14 +35,19 @@ class AppRouter {
       final authState = _authBloc.state;
 
       if (authState is AuthInitial &&
-          state.location != AppPages.splash.toPath) {
+          (state.location != AppPages.splash.toPath &&
+              state.location != AppPages.login.toPath &&
+              state.location != AppPages.register.toPath)) {
         return AppPages.splash.toPath;
       }
 
-      if (authState is Authenticated &&
-          state.location != AppPages.home.toPath) {
-        return AppPages.home.toPath;
-      }
+      // Why if Authenticated redirect only on home, when I also have other screens... Damn...
+      // if (authState is Authenticated &&
+      //     state.location != AppPages.home.toPath) {
+      //   return AppPages.home.toPath;
+      // }
+
+      return null;
     },
   );
 }

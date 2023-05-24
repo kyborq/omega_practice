@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:omega_practice/bloc/auth_bloc.dart';
 import 'package:omega_practice/firebase_options.dart';
 import 'package:omega_practice/router/app_router.dart';
 
@@ -18,14 +20,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appRouter = AppRouter();
+    return BlocProvider(
+      create: (context) => AuthBloc(),
+      child: Builder(
+        builder: (context) {
+          final appRouter = AppRouter();
 
-    return MaterialApp.router(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+          return MaterialApp.router(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            routerConfig: appRouter.goRouter,
+          );
+        },
       ),
-      routerConfig: appRouter.goRouter,
     );
   }
 }
