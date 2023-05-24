@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:omega_practice/bloc/auth_bloc.dart';
 import 'package:omega_practice/router/app_pages.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -6,17 +8,26 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        // ...
+      },
       child: Scaffold(
-        appBar: AppBar(title: Text(AppPages.home.toTitle)),
-        backgroundColor: Theme.of(context).colorScheme.background,
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              // ...
-            },
-            child: const Text('Hello world!2'),
-          ),
+        appBar: AppBar(
+          title: Text(AppPages.home.toTitle),
+        ),
+        body: Column(
+          children: [
+            BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                if (state is Authenticated) {
+                  return Text('Logged in as ${state.user.email}');
+                } else {
+                  return const Text('Not logged in');
+                }
+              },
+            ),
+          ],
         ),
       ),
     );

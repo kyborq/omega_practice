@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:omega_practice/bloc/auth_bloc.dart';
 import 'package:omega_practice/router/app_pages.dart';
 
@@ -15,6 +16,10 @@ class LoginScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is AuthLoading) {
           // TODO: Do something with progress state
+        }
+
+        if (state is Authenticated) {
+          context.go(AppPages.home.toPath);
         }
       },
       child: Scaffold(

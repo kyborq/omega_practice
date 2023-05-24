@@ -27,7 +27,7 @@ class AppRouter {
       ),
       GoRoute(
         path: AppPages.register.toPath,
-        builder: (context, state) => const RegisterScreen(),
+        builder: (context, state) => RegisterScreen(),
       ),
       GoRoute(
         path: AppPages.home.toPath,
