@@ -11,22 +11,44 @@ class SplashScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Добро пожаловать!'),
       ),
-      body: Column(
-        children: [
-          const Text('Войдите в аккаунт или создайте новый'),
-          ElevatedButton(
-            onPressed: () {
-              context.go(AppPages.login.toPath);
-            },
-            child: const Text('Есть аккаунт'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              context.go(AppPages.register.toPath);
-            },
-            child: const Text('Создать новый'),
-          ),
-        ],
+      body: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 24,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Text(
+              'Войдите в аккаунт или создайте новый',
+              style: TextStyle(fontSize: 32),
+            ),
+            const Spacer(),
+            ElevatedButton(
+              style: ButtonStyle(
+                padding: MaterialStateProperty.all<EdgeInsets>(
+                  const EdgeInsets.all(16),
+                ),
+              ),
+              onPressed: () async {
+                await context.push(AppPages.login.toPath);
+              },
+              child: const Text('Есть аккаунт'),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              style: ButtonStyle(
+                padding: MaterialStateProperty.all<EdgeInsets>(
+                  const EdgeInsets.all(16),
+                ),
+              ),
+              onPressed: () async {
+                await context.push(AppPages.register.toPath);
+              },
+              child: const Text('Создать новый'),
+            ),
+          ],
+        ),
       ),
     );
   }

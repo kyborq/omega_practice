@@ -1,4 +1,5 @@
 // import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:omega_practice/bloc/auth_bloc.dart';
 import 'package:omega_practice/router/app_pages.dart';
@@ -15,7 +16,7 @@ class AppRouter {
   GoRouter get goRouter => _goRouter;
 
   late final GoRouter _goRouter = GoRouter(
-    initialLocation: AppPages.splash.toPath,
+    // initialLocation: _context.loc,
     routes: <GoRoute>[
       GoRoute(
         path: AppPages.splash.toPath,
@@ -23,11 +24,11 @@ class AppRouter {
       ),
       GoRoute(
         path: AppPages.login.toPath,
-        builder: (context, state) => LoginScreen(),
+        builder: (context, state) => const LoginScreen(),
       ),
       GoRoute(
         path: AppPages.register.toPath,
-        builder: (context, state) => RegisterScreen(),
+        builder: (context, state) => const RegisterScreen(),
       ),
       GoRoute(
         path: AppPages.home.toPath,
@@ -44,9 +45,8 @@ class AppRouter {
         return AppPages.splash.toPath;
       }
 
-      // Why if Authenticated redirect only on home, when I also have other screens... Damn...
       // if (authState is Authenticated &&
-      //     state.location != AppPages.home.toPath) {
+      //     state.location == AppPages.splash.toPath) {
       //   return AppPages.home.toPath;
       // }
 

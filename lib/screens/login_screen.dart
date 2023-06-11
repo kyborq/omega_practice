@@ -3,58 +3,66 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:omega_practice/bloc/auth_bloc.dart';
 import 'package:omega_practice/router/app_pages.dart';
+import 'package:omega_practice/screens/widgets/login_form.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
-  final TextEditingController _loginController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  late AuthState _authState = AuthInitial();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is AuthLoading) {
-          // TODO: Do something with progress state
+        if (state is AuthError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              behavior: SnackBarBehavior.floating,
+              showCloseIcon: true,
+              content: Text(state.message),
+            ),
+          );
         }
-
         if (state is Authenticated) {
           context.go(AppPages.home.toPath);
         }
+        setState(() {
+          _authState = state;
+        });
       },
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(AppPages.login.toTitle),
-        ),
-        body: Column(
-          children: [
-            TextField(
-              controller: _loginController,
-              decoration: const InputDecoration(
-                label: Text('Логин:'),
-                filled: true,
-              ),
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(AppPages.login.toTitle),
+          ),
+          body: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 24,
             ),
-            TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                label: Text('Пароль:'),
-                filled: true,
-              ),
-              obscureText: true,
-            ),
-            ElevatedButton(
-              onPressed: () {
+            child: LoginForm(
+              isLoading: _authState is AuthLoading,
+              onSubmit: (login, password) {
                 BlocProvider.of<AuthBloc>(context).add(
                   Login(
-                    login: _loginController.text,
-                    password: _passwordController.text,
+                    login: login,
+                    password: password,
                   ),
                 );
               },
-              child: const Text('Войти'),
             ),
-          ],
+          ),
         ),
       ),
     );

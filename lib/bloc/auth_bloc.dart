@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:omega_practice/services/auth_service.dart';
 
@@ -26,14 +25,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
       emit(Authenticated(user));
     } on Exception {
-      print('Error authentificate!');
-      // ...
+      emit(
+        AuthError(
+          message: 'Не удалось подтвердить вашу личность',
+        ),
+      );
     }
   }
 
   dynamic _onRegister(Register event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-
     try {
       final user = await authService.registerWithEmail(
         email: event.username,
@@ -41,8 +42,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
       emit(Authenticated(user));
     } on Exception {
-      print('Error authentificate!');
-      // ...
+      emit(
+        AuthError(
+          message: 'Не удалось зарегистрироваться',
+        ),
+      );
     }
   }
 

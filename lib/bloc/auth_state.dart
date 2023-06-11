@@ -11,7 +11,6 @@ class AuthLoading extends AuthState {}
 
 class Authenticated extends AuthState {
   Authenticated(this.user);
-
   final User user;
 
   @override
@@ -19,7 +18,7 @@ class Authenticated extends AuthState {
 }
 
 class AuthError extends AuthState {
-  AuthError(this.message);
+  AuthError({required this.message});
 
   final String message;
 
