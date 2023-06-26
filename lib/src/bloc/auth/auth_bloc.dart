@@ -1,7 +1,9 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:omega_practice/services/auth_service.dart';
+import 'package:omega_practice/src/services/auth_service.dart';
 
 part 'auth_state.dart';
 part 'auth_event.dart';
@@ -11,6 +13,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<Login>(_onLogin);
     on<Register>(_onRegister);
     on<Logout>(_onLogout);
+    on<Existed>(_onExisted);
   }
 
   final authService = AuthService();
@@ -19,11 +22,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
 
     try {
-      final user = await authService.loginWithEmail(
-        email: event.login,
-        password: event.password,
-      );
-      emit(Authenticated(user));
+      final user = await authService.login(event.login, event.password);
+      emit(Authenticated(user.user!));
     } on Exception {
       emit(
         AuthError(
@@ -36,11 +36,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   dynamic _onRegister(Register event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     try {
-      final user = await authService.registerWithEmail(
-        email: event.username,
-        password: event.password,
+      final user = await authService.register(
+        event.username,
+        event.password,
       );
-      emit(Authenticated(user));
+      emit(Authenticated(user.user!));
     } on Exception {
       emit(
         AuthError(
@@ -51,6 +51,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   dynamic _onLogout(Logout event, Emitter<AuthState> emit) async {
+    await authService.logout();
     emit(AuthInitial());
+  }
+
+  FutureOr<void> _onExisted(Existed event, Emitter<AuthState> emit) {
+    // ignore: avoid_print
+    print('****check on exitens');
+
+    final user = authService.getCurrentUser();
+    if (user != null) {
+      emit(Authenticated(user));
+      // ignore: avoid_print
+      print('****good');
+    } else {
+      // ignore: avoid_print
+      print('****not good');
+      emit(AuthInitial());
+    }
   }
 }
