@@ -13,7 +13,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<Login>(_onLogin);
     on<Register>(_onRegister);
     on<Logout>(_onLogout);
-    on<Existed>(_onExisted);
   }
 
   final authService = AuthService();
@@ -56,18 +55,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   FutureOr<void> _onExisted(Existed event, Emitter<AuthState> emit) {
-    // ignore: avoid_print
-    print('****check on exitens');
+    // final user = authService.getCurrentUser();
+    // if (user != null) {
+    //   emit(Authenticated(user));
+    // }
 
-    final user = authService.getCurrentUser();
-    if (user != null) {
-      emit(Authenticated(user));
-      // ignore: avoid_print
-      print('****good');
-    } else {
-      // ignore: avoid_print
-      print('****not good');
-      emit(AuthInitial());
-    }
+    // emit(AuthInitial());
   }
 }

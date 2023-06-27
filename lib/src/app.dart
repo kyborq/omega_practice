@@ -12,7 +12,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthBloc>(create: (_) => AuthBloc()..add(Existed())),
+        BlocProvider<AuthBloc>(create: (_) => AuthBloc()),
         BlocProvider<GalleryBloc>(
           create: (_) => GalleryBloc()..add(GalleryLoadEvent()),
         ),
@@ -28,6 +28,15 @@ class App extends StatelessWidget {
             theme: ThemeData(
               useMaterial3: true,
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 16),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                ),
+              ),
             ),
             routerConfig: appRouter.goRouter,
           );
