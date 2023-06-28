@@ -3,6 +3,7 @@ enum AppPages {
   login,
   home,
   image,
+  splash,
 }
 
 extension AppPageExtension on AppPages {
@@ -13,9 +14,11 @@ extension AppPageExtension on AppPages {
       case AppPages.login:
         return '/login';
       case AppPages.home:
-        return '/';
+        return '/home';
       case AppPages.image:
         return '/image';
+      case AppPages.splash:
+        return '/';
     }
   }
 
@@ -29,6 +32,8 @@ extension AppPageExtension on AppPages {
         return 'Галерея';
       case AppPages.image:
         return 'Предпросмотр';
+      case AppPages.splash:
+        return 'Добро пожаловать';
     }
   }
 }
