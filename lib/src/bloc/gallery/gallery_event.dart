@@ -5,10 +5,10 @@ abstract class GalleryEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GalleryLoadEvent extends GalleryEvent {}
+class GalleryLoad extends GalleryEvent {}
 
-class GalleryAddImageEvent extends GalleryEvent {
-  GalleryAddImageEvent(this.path);
+class GalleryUpload extends GalleryEvent {
+  GalleryUpload(this.path);
 
   final String path;
 

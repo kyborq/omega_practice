@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:omega_practice/src/router/app_pages.dart';
+import 'package:flutter/services.dart';
 
 class LoginForm extends StatelessWidget {
   LoginForm({required this.onLogin, super.key});
@@ -33,6 +32,9 @@ class LoginForm extends StatelessWidget {
         children: [
           TextFormField(
             controller: _mailController,
+            inputFormatters: [
+              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+            ],
             decoration: const InputDecoration(
               label: Text('Электронная почта:'),
               filled: true,
@@ -42,6 +44,9 @@ class LoginForm extends StatelessWidget {
           const SizedBox(height: 8),
           TextFormField(
             controller: _passwordController,
+            inputFormatters: [
+              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+            ],
             decoration: const InputDecoration(
               label: Text('Пароль:'),
               filled: true,
@@ -52,12 +57,8 @@ class LoginForm extends StatelessWidget {
           const Spacer(),
           Row(
             children: [
-              TextButton(
-                onPressed: () async => context.push(AppPages.register.toPath),
-                child: const Text('Нет профиля'),
-              ),
               const Spacer(),
-              TextButton.icon(
+              FilledButton.icon(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     onLogin(

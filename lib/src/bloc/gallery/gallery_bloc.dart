@@ -9,14 +9,14 @@ part 'gallery_state.dart';
 
 class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
   GalleryBloc() : super(GalleryInitial()) {
-    on<GalleryLoadEvent>(_onGalleryLoad);
-    on<GalleryAddImageEvent>(_onGalleryUpload);
+    on<GalleryLoad>(_onGalleryLoad);
+    on<GalleryUpload>(_onGalleryUpload);
   }
 
   final GalleryService _galleryService = GalleryService();
 
   FutureOr<void> _onGalleryLoad(
-    GalleryLoadEvent event,
+    GalleryLoad event,
     Emitter<GalleryState> emit,
   ) async {
     emit(GalleryLoading());
@@ -31,7 +31,7 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
   }
 
   FutureOr<void> _onGalleryUpload(
-    GalleryAddImageEvent event,
+    GalleryUpload event,
     Emitter<GalleryState> emit,
   ) async {
     try {

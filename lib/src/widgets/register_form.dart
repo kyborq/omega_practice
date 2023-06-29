@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RegisterForm extends StatelessWidget {
   RegisterForm({required this.onRegister, super.key});
@@ -44,6 +45,9 @@ class RegisterForm extends StatelessWidget {
         children: [
           TextFormField(
             controller: _mailController,
+            inputFormatters: [
+              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+            ],
             decoration: const InputDecoration(
               label: Text('Электронная почта:'),
               filled: true,
@@ -53,6 +57,9 @@ class RegisterForm extends StatelessWidget {
           const SizedBox(height: 8),
           TextFormField(
             controller: _passwordController,
+            inputFormatters: [
+              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+            ],
             decoration: const InputDecoration(
               label: Text('Пароль:'),
               filled: true,
@@ -63,6 +70,9 @@ class RegisterForm extends StatelessWidget {
           const SizedBox(height: 8),
           TextFormField(
             controller: _repeatPasswordController,
+            inputFormatters: [
+              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+            ],
             decoration: const InputDecoration(
               label: Text('Повторите пароль:'),
               filled: true,
@@ -74,7 +84,7 @@ class RegisterForm extends StatelessWidget {
           Row(
             children: [
               const Spacer(),
-              TextButton.icon(
+              FilledButton.icon(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     onRegister(
@@ -83,10 +93,10 @@ class RegisterForm extends StatelessWidget {
                     );
                   }
                 },
-                icon: const Icon(Icons.login),
+                icon: const Icon(Icons.key),
                 label: const Padding(
                   padding: EdgeInsets.only(right: 8),
-                  child: Text('Войти'),
+                  child: Text('Продолжить'),
                 ),
               ),
             ],

@@ -10,56 +10,51 @@ part 'auth_event.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
-    on<Login>(_onLogin);
-    on<Register>(_onRegister);
-    on<Logout>(_onLogout);
+    on<LoginUser>(_onLogin);
+    on<RegisterUser>(_onRegister);
+    on<LogoutUser>(_onLogout);
+    on<CheckUser>(_onCheckAuth);
   }
 
   final authService = AuthService();
 
-  dynamic _onLogin(Login event, Emitter<AuthState> emit) async {
+  dynamic _onLogin(LoginUser event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
 
     try {
-      final user = await authService.login(event.login, event.password);
+      final user = await authService.login(event.email, event.password);
       emit(Authenticated(user.user!));
-    } on Exception {
-      emit(
-        AuthError(
-          message: 'Не удалось подтвердить вашу личность',
-        ),
-      );
+    } on FirebaseAuthException catch (e) {
+      final errorMessage = e.message?.split('] ').last ?? e.message;
+      emit(AuthError(message: errorMessage!));
     }
   }
 
-  dynamic _onRegister(Register event, Emitter<AuthState> emit) async {
+  dynamic _onRegister(RegisterUser event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     try {
       final user = await authService.register(
-        event.username,
+        event.email,
         event.password,
       );
       emit(Authenticated(user.user!));
-    } on Exception {
-      emit(
-        AuthError(
-          message: 'Не удалось зарегистрироваться',
-        ),
-      );
+    } on FirebaseAuthException catch (e) {
+      final errorMessage = e.message?.split('] ').last ?? e.message;
+      emit(AuthError(message: errorMessage!));
     }
   }
 
-  dynamic _onLogout(Logout event, Emitter<AuthState> emit) async {
+  dynamic _onLogout(LogoutUser event, Emitter<AuthState> emit) async {
     await authService.logout();
     emit(AuthInitial());
   }
 
-  FutureOr<void> _onExisted(Existed event, Emitter<AuthState> emit) {
-    // final user = authService.getCurrentUser();
-    // if (user != null) {
-    //   emit(Authenticated(user));
-    // }
-
-    // emit(AuthInitial());
+  FutureOr<void> _onCheckAuth(CheckUser event, Emitter<AuthState> emit) {
+    final user = authService.getCurrentUser();
+    if (user != null) {
+      emit(Authenticated(user));
+    } else {
+      emit(AuthInitial());
+    }
   }
 }
