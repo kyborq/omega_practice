@@ -22,7 +22,9 @@ class ImageTags extends StatelessWidget {
                 .toList(),
           );
         } else {
-          return const SizedBox.shrink();
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         }
       },
     );

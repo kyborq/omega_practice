@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:omega_practice/src/strings.dart';
 
 class RegisterForm extends StatelessWidget {
   RegisterForm({required this.onRegister, super.key});
@@ -13,25 +14,25 @@ class RegisterForm extends StatelessWidget {
 
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Поле обязательно для заполнения';
+      return requiredField;
     }
     return null;
   }
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Поле обязательно для заполнения';
+      return requiredField;
     }
     return null;
   }
 
   String? _validateRepeatPassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Поле обязательно для заполнения';
+      return requiredField;
     }
 
     if (value != _passwordController.text) {
-      return 'Пароли не совпадают';
+      return passwordNotMatch;
     }
 
     return null;
@@ -49,7 +50,7 @@ class RegisterForm extends StatelessWidget {
               FilteringTextInputFormatter.deny(RegExp(r'\s')),
             ],
             decoration: const InputDecoration(
-              label: Text('Электронная почта:'),
+              label: Text(emailField),
               filled: true,
             ),
             validator: _validateEmail,
@@ -61,7 +62,7 @@ class RegisterForm extends StatelessWidget {
               FilteringTextInputFormatter.deny(RegExp(r'\s')),
             ],
             decoration: const InputDecoration(
-              label: Text('Пароль:'),
+              label: Text(passwordField),
               filled: true,
             ),
             obscureText: true,
@@ -74,7 +75,7 @@ class RegisterForm extends StatelessWidget {
               FilteringTextInputFormatter.deny(RegExp(r'\s')),
             ],
             decoration: const InputDecoration(
-              label: Text('Повторите пароль:'),
+              label: Text(repeatPasswordField),
               filled: true,
             ),
             obscureText: true,
@@ -96,7 +97,7 @@ class RegisterForm extends StatelessWidget {
                 icon: const Icon(Icons.key),
                 label: const Padding(
                   padding: EdgeInsets.only(right: 8),
-                  child: Text('Продолжить'),
+                  child: Text(registerButton),
                 ),
               ),
             ],

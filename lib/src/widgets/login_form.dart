@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:omega_practice/src/strings.dart';
 
 class LoginForm extends StatelessWidget {
   LoginForm({required this.onLogin, super.key});
@@ -12,14 +13,14 @@ class LoginForm extends StatelessWidget {
 
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Поле обязательно для заполнения';
+      return requiredField;
     }
     return null;
   }
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Поле обязательно для заполнения';
+      return requiredField;
     }
     return null;
   }
@@ -36,7 +37,7 @@ class LoginForm extends StatelessWidget {
               FilteringTextInputFormatter.deny(RegExp(r'\s')),
             ],
             decoration: const InputDecoration(
-              label: Text('Электронная почта:'),
+              label: Text(emailField),
               filled: true,
             ),
             validator: _validateEmail,
@@ -48,7 +49,7 @@ class LoginForm extends StatelessWidget {
               FilteringTextInputFormatter.deny(RegExp(r'\s')),
             ],
             decoration: const InputDecoration(
-              label: Text('Пароль:'),
+              label: Text(passwordField),
               filled: true,
             ),
             obscureText: true,
@@ -70,7 +71,7 @@ class LoginForm extends StatelessWidget {
                 icon: const Icon(Icons.login),
                 label: const Padding(
                   padding: EdgeInsets.only(right: 8),
-                  child: Text('Войти'),
+                  child: Text(loginButton),
                 ),
               ),
             ],

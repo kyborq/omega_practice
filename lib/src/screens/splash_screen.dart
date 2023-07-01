@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:omega_practice/src/bloc/auth/auth_bloc.dart';
 import 'package:omega_practice/src/router/app_pages.dart';
+import 'package:omega_practice/src/strings.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -28,12 +29,12 @@ class SplashScreen extends StatelessWidget {
                   const Spacer(),
                   FilledButton(
                     onPressed: () async => context.push(AppPages.login.toPath),
-                    child: const Text('Войти'),
+                    child: const Text(loginButton),
                   ),
                   TextButton(
                     onPressed: () async =>
                         context.push(AppPages.register.toPath),
-                    child: const Text('Создать профиль'),
+                    child: const Text(registerButton),
                   ),
                 ],
               );

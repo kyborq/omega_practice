@@ -24,9 +24,9 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
     try {
       final imageUrls = await _galleryService.getImages();
       emit(GalleryLoaded(imageUrls!));
-    } on Exception catch (e) {
+    } on Exception {
       // ignore: avoid_print
-      print(e);
+      // print(e);
     }
   }
 
@@ -35,10 +35,13 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
     Emitter<GalleryState> emit,
   ) async {
     try {
+      emit(GalleryLoading());
       await _galleryService.uploadImage(event.path);
-    } on Exception catch (e) {
+      final imageUrls = await _galleryService.getImages();
+      emit(GalleryLoaded(imageUrls!));
+    } on Exception {
       // ignore: avoid_print
-      print(e);
+      // print(e);
     }
   }
 }
