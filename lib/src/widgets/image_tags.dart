@@ -11,7 +11,7 @@ class ImageTags extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ImageBloc, ImageState>(
       builder: (context, state) {
-        if (state is ImageLoadedState) {
+        if (state is LoadedTags) {
           return Wrap(
             children: state.tags
                 .map(

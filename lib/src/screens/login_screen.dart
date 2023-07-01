@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:omega_practice/src/bloc/auth/auth_bloc.dart';
+import 'package:omega_practice/src/router/app_pages.dart';
 import 'package:omega_practice/src/widgets/login_form.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Войти'),
+        title: Text(AppPages.login.toTitle),
       ),
       body: SafeArea(
         minimum: const EdgeInsets.all(16),

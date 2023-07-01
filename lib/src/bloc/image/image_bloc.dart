@@ -7,23 +7,23 @@ part 'image_event.dart';
 part 'image_state.dart';
 
 class ImageBloc extends Bloc<ImageEvent, ImageState> {
-  ImageBloc() : super(ImageLoadingState()) {
-    on<LoadImageTagsEvent>(_getImageTags);
+  ImageBloc() : super(LoadingTags()) {
+    on<LoadTags>(_getImageTags);
   }
 
   final ImageService _imageService = ImageService();
 
   FutureOr<void> _getImageTags(
-    LoadImageTagsEvent event,
+    LoadTags event,
     Emitter<ImageState> emit,
   ) async {
-    emit(ImageLoadingState());
+    emit(LoadingTags());
 
     try {
       final tags = await _imageService.tagImage(event.imageUrl);
-      emit(ImageLoadedState(tags));
+      emit(LoadedTags(tags));
     } on Exception catch (e) {
-      emit(ImageErrorState(e.toString()));
+      emit(TagsError(e.toString()));
     }
   }
 }

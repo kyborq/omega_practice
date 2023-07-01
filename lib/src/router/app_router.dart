@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:omega_practice/src/bloc/auth/auth_bloc.dart';
 import 'package:omega_practice/src/router/app_pages.dart';
 import 'package:omega_practice/src/screens/home_screen.dart';
+import 'package:omega_practice/src/screens/image_screen.dart';
 import 'package:omega_practice/src/screens/login_screen.dart';
 import 'package:omega_practice/src/screens/register_screen.dart';
 import 'package:omega_practice/src/screens/splash_screen.dart';
@@ -35,6 +36,13 @@ class AppRouter {
       GoRoute(
         path: AppPages.home.toPath,
         builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: '${AppPages.image.toPath}/:url',
+        builder: (context, state) {
+          final url = state.pathParameters['url'];
+          return ImageScreen(url: url!);
+        },
       ),
     ],
     redirect: (context, state) {

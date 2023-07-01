@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:omega_practice/src/bloc/auth/auth_bloc.dart';
+import 'package:omega_practice/src/bloc/gallery/gallery_bloc.dart';
+import 'package:omega_practice/src/router/app_pages.dart';
+import 'package:omega_practice/src/widgets/image_gallery.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,7 +20,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Галерея'),
+        title: Text(AppPages.home.toTitle),
         elevation: 4,
         actions: [
           IconButton(
@@ -28,7 +31,19 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: const Text('heh'),
+      body: BlocBuilder<GalleryBloc, GalleryState>(
+        builder: (context, state) {
+          if (state is GalleryLoaded) {
+            return ImageGallery(
+              images: state.imageUrls,
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _pickImage,
         child: const Icon(Icons.upload),

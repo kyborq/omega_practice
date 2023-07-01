@@ -31,7 +31,7 @@ extension AppPageExtension on AppPages {
       case AppPages.home:
         return 'Галерея';
       case AppPages.image:
-        return 'Предпросмотр';
+        return 'Изображение';
       case AppPages.splash:
         return 'Добро пожаловать';
     }

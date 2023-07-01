@@ -17,7 +17,7 @@ class _ImageScreenState extends State<ImageScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ImageBloc>(context).add(LoadImageTagsEvent(widget.url));
+    BlocProvider.of<ImageBloc>(context).add(LoadTags(widget.url));
   }
 
   @override
