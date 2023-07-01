@@ -21,6 +21,8 @@ class ImageTags extends StatelessWidget {
                 )
                 .toList(),
           );
+        } else if (state is TagsError) {
+          return Text(state.errorMessage);
         } else {
           return const Center(
             child: CircularProgressIndicator(),
